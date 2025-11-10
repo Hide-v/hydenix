@@ -43,23 +43,24 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = (with pkgs; [
-      hyde
-      Bibata-Modern-Ice
-      Tela-circle-dracula
-      kdePackages.kconfig
-      wf-recorder
-      python-pyamdgpuinfo
-      hyq
-      hydectl
-      hyde-ipc
-      hyde-config
-      hyprcursor
-      hyprutils
-      xdg-desktop-portal-hyprland
-      hyprpicker
-      hypridle
-    ]) ++ (lib.mkIf (cfg.plugins != []) pluginPackages); # 仅在有插件时追加插件包列表
+    home.packages = (with pkgs; [
+      # 目标文件中的原有包 (无需改动)
+      hyde
+      Bibata-Modern-Ice
+      Tela-circle-dracula
+      kdePackages.kconfig
+      wf-recorder
+      python-pyamdgpuinfo
+      hyq
+      hydectl
+      hyde-ipc
+      hyde-config
+      hyprcursor
+      hyprutils
+      xdg-desktop-portal-hyprland
+      hyprpicker
+      hypridle
+    ]) ++ lib.optionals (cfg.plugins != []) pluginPackages;
 
     home.sessionVariables = {
       HYPRLAND_CONFIG = "${config.xdg.dataHome}/hypr/hyprland.conf";
