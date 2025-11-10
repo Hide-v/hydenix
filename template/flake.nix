@@ -5,6 +5,12 @@
     # Your nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Hydenix
     hydenix = {
       # Available inputs:
