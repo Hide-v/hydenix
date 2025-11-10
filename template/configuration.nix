@@ -54,6 +54,17 @@ in
   #   };
   # };
 
+  i18n.inputMethod = {
+     enable = true;
+     type = "fcitx5";
+     fcitx5 = {
+	waylandFrontend = true;
+	addons = with pkgs; [
+	 rime-data
+	 fcitx5-rime
+     	];
+     };
+   };
   # Home Manager Configuration - manages user-specific configurations (dotfiles, themes, etc.)
   home-manager = {
     useGlobalPkgs = true;
@@ -61,7 +72,7 @@ in
     extraSpecialArgs = { inherit inputs; };
     # User Configuration - REQUIRED: Change "hydenix" to your actual username
     # This must match the username you define in users.users below
-    users."hydenix" =
+    users."sweet" =
       { ... }:
       {
         imports = [
@@ -72,26 +83,29 @@ in
   };
 
   # User Account Setup - REQUIRED: Change "hydenix" to your desired username (must match above)
-  users.users.hydenix = {
+  users.users.sweet = {
     isNormalUser = true;
-    initialPassword = "hydenix"; # SECURITY: Change this password after first login with `passwd`
+    initialPassword = "sweet"; # SECURITY: Change this password after first login with `passwd`
     extraGroups = [
       "wheel"
       "networkmanager"
       "video"
     ]; # User groups (determines permissions)
-    shell = pkgs.zsh; # Default shell (options: pkgs.bash, pkgs.zsh, pkgs.fish)
+    shell = pkgs.fish; # Default shell (options: pkgs.bash, pkgs.zsh, pkgs.fish)
   };
+
+  programs.fish.enable = true;
 
   # Hydenix Configuration - Main configuration for the Hydenix desktop environment
   hydenix = {
     enable = true; # Enable Hydenix modules
     # Basic System Settings (REQUIRED):
-    hostname = "hydenix"; # REQUIRED: Set your computer's network name (change to something unique)
-    timezone = "America/Vancouver"; # REQUIRED: Set timezone (examples: "America/New_York", "Europe/London", "Asia/Tokyo")
-    locale = "en_CA.UTF-8"; # REQUIRED: Set locale/language (examples: "en_US.UTF-8", "en_GB.UTF-8", "de_DE.UTF-8")
+    hostname = "nixos"; # REQUIRED: Set your computer's network name (change to something unique)
+    timezone = "Asia/Shanghai"; # REQUIRED: Set timezone (examples: "America/New_York", "Europe/London", "Asia/Tokyo")
+    locale = "zh_CN.UTF-8"; # REQUIRED: Set locale/language (examples: "en_US.UTF-8", "en_GB.UTF-8", "de_DE.UTF-8")
     # For more configuration options, see: ./docs/options.md
   };
+
 
   # System Version - Don't change unless you know what you're doing (helps with system upgrades and compatibility)
   system.stateVersion = "25.05";
