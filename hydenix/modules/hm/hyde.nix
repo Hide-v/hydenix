@@ -30,15 +30,15 @@ in
 {
   options.hydenix.hm.hyde = {
     enable = lib.mkOption {
-      type = lib.types.bool;
-      default = config.hydenix.hm.enable;
-      description = "Enable hyde module";
+        type = lib.types.bool;
+        default = config.hydenix.hm.enable;
+        description = "Enable hyde module";
     };
 
     plugins = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [];
-      description = "List of hyprland-plugins names to enable (e.g., [\"hyprscrolling\", \"hyprnome\"]).";
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "List of hyprland-plugins names to enable (e.g., [\"hyprscrolling\", \"hyprnome\"]).";
     };
   };
 
