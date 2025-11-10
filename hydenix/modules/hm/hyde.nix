@@ -19,9 +19,7 @@ let
   originalHyprlandConf = builtins.readFile "${pkgs.hyde}/Configs/.config/hypr/hyprland.conf";
 
   customHyprlandConf = builtins.concatStringsSep "\n" ([
-    "# ====================================================================="
-    "# Hyprland Plugins automatically injected by Nix based on configuration"
-    "# ====================================================================="
+    ""
   ] ++ pluginConfLines ++ [
     ""
     originalHyprlandConf
@@ -30,37 +28,36 @@ in
 {
   options.hydenix.hm.hyde = {
     enable = lib.mkOption {
-        type = lib.types.bool;
-        default = config.hydenix.hm.enable;
-        description = "Enable hyde module";
+      type = lib.types.bool;
+      default = config.hydenix.hm.enable;
+      description = "Enable hyde module";
     };
 
     plugins = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
-        description = "List of hyprland-plugins names to enable (e.g., [\"hyprscrolling\", \"hyprnome\"]).";
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of hyprland-plugins names to enable (e.g., [\"hyprscrolling\", \"hyprnome\"]).";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = (with pkgs; [
-      # 目标文件中的原有包 (无需改动)
-      hyde
-      Bibata-Modern-Ice
-      Tela-circle-dracula
-      kdePackages.kconfig
-      wf-recorder
-      python-pyamdgpuinfo
-      hyq
-      hydectl
-      hyde-ipc
-      hyde-config
-      hyprcursor
-      hyprutils
-      xdg-desktop-portal-hyprland
-      hyprpicker
-      hypridle
-    ]) ++ lib.optionals (cfg.plugins != []) pluginPackages;
+    home.packages = (with pkgs; [
+      hyde
+      Bibata-Modern-Ice
+      Tela-circle-dracula
+      kdePackages.kconfig
+      wf-recorder
+      python-pyamdgpuinfo
+      hyq
+      hydectl
+      hyde-ipc
+      hyde-config
+      hyprcursor
+      hyprutils
+      xdg-desktop-portal-hyprland
+      hyprpicker
+      hypridle
+    ]) ++ lib.optionals (cfg.plugins != []) pluginPackages;
 
     home.sessionVariables = {
       HYPRLAND_CONFIG = "${config.xdg.dataHome}/hypr/hyprland.conf";
@@ -76,7 +73,7 @@ in
 
     home.file = {
       ".config/hypr/hyprland.conf" = lib.mkDefault {
-        text = customHyprlandConf; 
+        text = customHyprlandConf;
         force = true;
       };
 
@@ -102,7 +99,6 @@ in
           RestartSec=5s
           Environment="DISPLAY=:0"
 
-          # Make sure the required directories exist
           ExecStartPre=/usr/bin/env mkdir -p %h/.config/hyde
           ExecStartPre=/usr/bin/env mkdir -p %h/.local/state/hyde
 
@@ -199,7 +195,6 @@ in
         mutable = true;
       };
 
-      # stateful files
       ".config/hyde/config.toml" = {
         source = "${pkgs.hyde}/Configs/.config/hyde/config.toml";
         force = true;
@@ -221,7 +216,7 @@ in
         force = true;
         mutable = true;
       };
-      
+
       ".config/hypr/hyde.conf" = lib.mkDefault { source = "${pkgs.hyde}/Configs/.config/hypr/hyde.conf"; };
       ".config/hypr/keybindings.conf" = lib.mkDefault { source = "${pkgs.hyde}/Configs/.config/hypr/keybindings.conf"; };
       ".config/hypr/monitors.conf" = lib.mkDefault { source = "${pkgs.hyde}/Configs/.config/hypr/monitors.conf"; };
@@ -246,9 +241,8 @@ in
       ".config/hypr/animations/standard.conf" = lib.mkDefault { source = "${pkgs.hyde}/Configs/.config/hypr/animations/standard.conf"; };
       ".config/hypr/animations/vertical.conf" = lib.mkDefault { source = "${pkgs.hyde}/Configs/.config/hypr/animations/vertical.conf"; };
       ".config/hypr/hypridle.conf" = lib.mkDefault { source = "${pkgs.hyde}/Configs/.config/hypr/hypridle.conf"; };
-      
     };
-    
-    wayland.windowManager.hyprland.enable = lib.mkForce false; 
+
+    wayland.windowManager.hyprland.enable = lib.mkForce false;
   };
 }
