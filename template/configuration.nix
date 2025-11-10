@@ -11,6 +11,11 @@ let
   pkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
+    config = {
+      permittedInsecurePackages = [
+        "electron-36.9.5"
+      ];
+    };
     overlays = [
       inputs.hydenix.overlays.default
     ];
@@ -60,8 +65,8 @@ in
      fcitx5 = {
 	waylandFrontend = true;
 	addons = with pkgs; [
-	 rime-data
-	 fcitx5-rime
+	rime-data
+	fcitx5-rime
      	];
      };
    };
