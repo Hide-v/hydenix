@@ -16,7 +16,7 @@ let
   ) cfg.plugins;
 
 
-  originalHyprlandConf = builtins.readFile "${pkgs.hydenix.hyde}/Configs/.config/hypr/hyprland.conf";
+  originalHyprlandConf = builtins.readFile "${pkgs.hyde}/Configs/.config/hypr/hyprland.conf";
 
   customHyprlandConf = builtins.concatStringsSep "\n" ([
     "# ====================================================================="
