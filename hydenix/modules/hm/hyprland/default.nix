@@ -70,5 +70,10 @@ in
         force = true;
       };
     };
+
+    wayland.windowManager.hyprland = lib.mkIf (cfg.plugins != [ ]) {
+      enable = true;
+      plugins = cfg.plugins;
+    };
   };
 }

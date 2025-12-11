@@ -16,6 +16,11 @@ in
       default = true;
       description = "Enable system module";
     };
+    useHyprlandFlake = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Use Hyprland from hyprwm/Hyprland flake for plugin compatibility";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -63,7 +68,7 @@ in
     };
 
     programs.hyprland = {
-      package = pkgs.hyprland;
+      package = if config.hydenix.system.useHyprlandFlake then inputs.hyprland.packages.${pkgs.system}.hyprland else pkgs.hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       enable = true;
       withUWSM = true;

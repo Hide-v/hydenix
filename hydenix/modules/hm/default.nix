@@ -39,7 +39,7 @@
 
   config = {
     hydenix.hm.enable = lib.mkDefault false;
-    home.stateVersion = "25.05";
+    home.stateVersion = "25.11";
 
     # let home-manager control itself
     programs.home-manager.enable = true;

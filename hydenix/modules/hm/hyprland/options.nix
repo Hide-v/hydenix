@@ -213,5 +213,11 @@ in
         description = "Complete monitor configuration override";
       };
     };
+
+    plugins = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [ ];
+      description = "Hyprland plugins to load via Home Manager";
+    };
   };
 }

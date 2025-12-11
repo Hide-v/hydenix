@@ -54,7 +54,7 @@ inputs.nixpkgs.lib.nixosSystem {
           #   '';
           # };
 
-          system.stateVersion = "25.05";
+          system.stateVersion = "25.11";
         };
 
         # Create nixos user with password

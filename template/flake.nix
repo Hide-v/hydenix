@@ -3,7 +3,7 @@
 
   inputs = rec {
     # Your nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # Hydenix
     hydenix = {
@@ -19,6 +19,12 @@
 
     # Hardware Configuration's, used in ./configuration.nix. Feel free to remove if unused
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs =
